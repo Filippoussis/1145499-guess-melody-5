@@ -1,0 +1,10 @@
+import {GameType} from "../../const";
+
+export default PropTypes.shape({
+  answers: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+  })).isRequired,
+  genre: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
+}).isRequired;
