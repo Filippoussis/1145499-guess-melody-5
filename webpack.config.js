@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -27,7 +28,15 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       '@components': path.resolve(__dirname, 'src/components/'),
+      '@hocs': path.resolve(__dirname, 'src/hocs/'),
     }
   },
   devtool: 'source-map',
+  plugins: [
+    new webpack.ProvidePlugin({
+      'React': 'react',
+      'ReactDOM': 'react-dom',
+      'PropTypes': 'prop-types',
+    })
+  ],
 };
