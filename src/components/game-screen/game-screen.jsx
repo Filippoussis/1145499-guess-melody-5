@@ -1,11 +1,17 @@
-import React, {PureComponent} from "react";
-import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {GameType} from '../../const';
 import ArtistQuestionScreen from '@components/artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '@components/genre-question-screen/genre-question-screen';
 
-class GameScreen extends PureComponent {
+import artistQuestionProp from "@components/artist-question-screen/artist-question.prop";
+import genreQuestionProp from "@components/genre-question-screen/genre-question.prop";
+
+import withAudioPlayer from '@hocs/with-audio-player/with-audio-player';
+
+const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
+const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+
+export default class GameScreen extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -28,7 +34,7 @@ class GameScreen extends PureComponent {
     switch (question.type) {
       case GameType.ARTIST:
         return (
-          <ArtistQuestionScreen
+          <ArtistQuestionScreenWrapped
             question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
@@ -39,7 +45,7 @@ class GameScreen extends PureComponent {
         );
       case GameType.GENRE:
         return (
-          <GenreQuestionScreen
+          <GenreQuestionScreenWrapped
             question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
@@ -55,7 +61,7 @@ class GameScreen extends PureComponent {
 }
 
 GameScreen.propTypes = {
-  questions: PropTypes.array.isRequired,
+  questions: PropTypes.arrayOf(
+      PropTypes.oneOfType([artistQuestionProp, genreQuestionProp]).isRequired
+  ),
 };
-
-export default GameScreen;

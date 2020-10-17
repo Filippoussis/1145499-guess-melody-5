@@ -1,5 +1,3 @@
-import React from "react";
-
 const GameOverScreen = () => {
   return (
     <section className="result">

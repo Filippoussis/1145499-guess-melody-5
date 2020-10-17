@@ -1,5 +1,3 @@
-import React from "react";
-
 const AuthScreen = () => {
   return (
     <section className="login">

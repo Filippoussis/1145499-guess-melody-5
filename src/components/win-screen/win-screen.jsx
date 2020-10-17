@@ -1,5 +1,3 @@
-import React from "react";
-
 const WinScreen = () => {
   return (
     <section className="result">
